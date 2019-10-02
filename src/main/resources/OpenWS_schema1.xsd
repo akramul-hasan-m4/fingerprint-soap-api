@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://openws.papillon.ru/OPServer" 
+xmlns:tns="http://openws.papillon.ru/OPServer" elementFormDefault="qualified">
+	
+	<xs:element name="addImageToCardRequest" type="tns:addImageToCardRequest"/>
+
+  <xs:element name="addImageToCardResponse" type="tns:addImageToCardResponse"/>
+
+  <xs:element name="cancelCardRequest" type="tns:cancelCardRequest"/>
+
+  <xs:element name="cancelCardResponse" type="tns:cancelCardResponse"/>
+
+  <xs:element name="cancelFindRequest" type="tns:cancelFindRequest"/>
+
+  <xs:element name="cancelFindResponse" type="tns:cancelFindResponse"/>
+
+  <xs:element name="checkStatusRequest" type="tns:checkStatusRequest"/>
+
+  <xs:element name="checkStatusResponse" type="tns:checkStatusResponse"/>
+
+  <xs:element name="createCardRequest" type="tns:createCardRequest"/>
+
+  <xs:element name="createCardResponse" type="tns:createCardResponse"/>
+
+  <xs:element name="findFingersRequest" type="tns:findFingersRequest"/>
+
+  <xs:element name="findFingersResponse" type="tns:findFingersResponse"/>
+
+  <xs:element name="findFingersUnspecRequest" type="tns:findFingersUnspecRequest"/>
+
+  <xs:element name="findFingersUnspecResponse" type="tns:findFingersUnspecResponse"/>
+
+  <xs:element name="findRequestRequest" type="tns:findRequestRequest"/>
+
+  <xs:element name="findRequestResponse" type="tns:findRequestResponse"/>
+
+  <xs:element name="getCandidateRequest" type="tns:getCandidateRequest"/>
+
+  <xs:element name="getCandidateResponse" type="tns:getCandidateResponse"/>
+
+  <xs:element name="getImagesRequest" type="tns:getImagesRequest"/>
+
+  <xs:element name="getImagesResponse" type="tns:getImagesResponse"/>
+
+  <xs:element name="getInfoRequest" type="tns:getInfoRequest"/>
+
+  <xs:element name="getInfoResponse" type="tns:getInfoResponse"/>
+
+  <xs:element name="saveCardRequest" type="tns:saveCardRequest"/>
+
+  <xs:element name="saveCardResponse" type="tns:saveCardResponse"/>
+
+  <xs:complexType name="findFingersRequest">
+    <xs:sequence>
+      <xs:element name="RThumbFinger" type="xs:string" minOccurs="0"/>
+      <xs:element name="RIndexFinger" type="xs:string" minOccurs="0"/>
+      <xs:element name="RMiddleFinger" type="xs:string" minOccurs="0"/>
+      <xs:element name="RRingFinger" type="xs:string" minOccurs="0"/>
+      <xs:element name="RLittleFinger" type="xs:string" minOccurs="0"/>
+      <xs:element name="LThumbFinger" type="xs:string" minOccurs="0"/>
+      <xs:element name="LIndexFinger" type="xs:string" minOccurs="0"/>
+      <xs:element name="LMiddleFinger" type="xs:string" minOccurs="0"/>
+      <xs:element name="LRingFinger" type="xs:string" minOccurs="0"/>
+      <xs:element name="LLittleFinger" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+
+  <xs:complexType name="findFingersResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:findResponse" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="findResponse">
+    <xs:sequence>
+      <xs:element name="errorCode" type="xs:int"/>
+      <xs:element name="errorMess" type="xs:string" minOccurs="0"/>
+      <xs:element name="id" type="xs:string" minOccurs="0"/>
+      <xs:element name="token" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="createCardRequest">
+    <xs:sequence>
+      <xs:element name="TextTags" type="tns:tag" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tag">
+    <xs:sequence>
+      <xs:element name="caption" type="xs:string" minOccurs="0"/>
+      <xs:element name="id" type="xs:string" minOccurs="0"/>
+      <xs:element name="value" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="createCardResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:findResponse" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cancelFindRequest">
+    <xs:sequence>
+      <xs:element name="token" type="xs:string" minOccurs="0"/>
+      <xs:element name="vrfid" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cancelFindResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:statusResponce" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="statusResponce">
+    <xs:sequence>
+      <xs:element name="complete" type="xs:int"/>
+      <xs:element name="errorCode" type="xs:int"/>
+      <xs:element name="errorMess" type="xs:string" minOccurs="0"/>
+      <xs:element name="status" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getImagesRequest">
+    <xs:sequence>
+      <xs:element name="objId" type="xs:string" minOccurs="0"/>
+      <xs:element name="tagsNum" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getImagesResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:candidate" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="candidate">
+    <xs:sequence>
+      <xs:element name="errorCode" type="xs:int"/>
+      <xs:element name="errorMess" type="xs:string" minOccurs="0"/>
+      <xs:element name="imageTags" type="tns:tag" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="textTags" type="tns:tag" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addImageToCardRequest">
+    <xs:sequence>
+      <xs:element name="token" type="xs:string" minOccurs="0"/>
+      <xs:element name="tagNum" type="xs:string" minOccurs="0"/>
+      <xs:element name="imageData" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addImageToCardResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:statusResponce" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="checkStatusRequest">
+    <xs:sequence>
+      <xs:element name="token" type="xs:string" minOccurs="0"/>
+      <xs:element name="vrfid" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="checkStatusResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:statusResponce" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getCandidateRequest">
+    <xs:sequence>
+      <xs:element name="token" type="xs:string" minOccurs="0"/>
+      <xs:element name="vrfid" type="xs:string" minOccurs="0"/>
+      <xs:element name="num" type="xs:int" minOccurs="0"/>
+      <xs:element name="nid" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getCandidateResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:candidate" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="saveCardRequest">
+    <xs:sequence>
+      <xs:element name="token" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="saveCardResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:statusResponce" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cancelCardRequest">
+    <xs:sequence>
+      <xs:element name="token" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cancelCardResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:statusResponce" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getInfoRequest">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getInfoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="findFingersUnspecRequest">
+    <xs:sequence>
+      <xs:element name="UnspecFinger0" type="xs:string" minOccurs="0"/>
+      <xs:element name="UnspecFinger1" type="xs:string" minOccurs="0"/>
+      <xs:element name="UnspecFinger2" type="xs:string" minOccurs="0"/>
+      <xs:element name="UnspecFinger3" type="xs:string" minOccurs="0"/>
+      <xs:element name="UnspecFinger4" type="xs:string" minOccurs="0"/>
+      <xs:element name="UnspecFinger5" type="xs:string" minOccurs="0"/>
+      <xs:element name="UnspecFinger6" type="xs:string" minOccurs="0"/>
+      <xs:element name="UnspecFinger7" type="xs:string" minOccurs="0"/>
+      <xs:element name="UnspecFinger8" type="xs:string" minOccurs="0"/>
+      <xs:element name="UnspecFinger9" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="findFingersUnspecResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:findResponse" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="findRequestRequest">
+    <xs:sequence>
+      <xs:element name="RequestFile" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="findRequestResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:findResponse" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+	
+</xs:schema>
