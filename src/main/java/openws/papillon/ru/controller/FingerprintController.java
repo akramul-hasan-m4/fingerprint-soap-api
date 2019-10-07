@@ -146,8 +146,8 @@ public class FingerprintController {
 		
 		c.setErrorCode(1);
 		c.setErrorMess("No error found");
-		c.setImageTags(imageTags);
-		c.setTextTags(imageTags);
+		c.getImageTags().addAll(imageTags);
+		c.getTextTags().addAll(imageTags);
 		
 		response.setReturn(c);
 		return new ObjectFactory().createGetImagesResponse(response);
